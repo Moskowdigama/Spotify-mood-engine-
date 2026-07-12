@@ -160,6 +160,38 @@ st.markdown("""
 # ---------- LOAD DATA ----------
 df = pickle.load(open('songs.pkl', 'rb'))
 
+#new code 
+from difflib import get_close_matches
+
+def find_song_mood(song_title, threshold=0.6):
+    choices = df['Track'].tolist()
+    matches = get_close_matches(song_title, choices, n=1, cutoff=threshold)
+    
+    if matches:
+        matched_track = matches[0]
+        result = df[df['Track'] == matched_track].iloc[0]
+        return {
+            'matched_title': result['Track'],
+            'artist': result['Artist'],
+            'mood': result['mood']
+        }
+    return None
+
+def analyze_mood_history(song_list):
+    results = []
+    for song in song_list:
+        match = find_song_mood(song)
+        if match:
+            results.append(match)
+    
+    if not results:
+        return None, None
+    
+    mood_df = pd.DataFrame(results)
+    mood_counts = mood_df['mood'].value_counts()
+    
+    return mood_df, mood_counts
+
 # ---------- HEADER ----------
 st.markdown('<div class="big-title">moodmix 🎧</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">no cap, this actually gets your vibe fr fr</div>', unsafe_allow_html=True)
