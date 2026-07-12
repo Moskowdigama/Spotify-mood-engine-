@@ -57,6 +57,39 @@ if "credentials" not in st.session_state:
 else:
     st.success("✅ YouTube Connected!")
 
+#new code here 
+def get_liked_videos(access_token):
+    headers = {"Authorization": f"Bearer {access_token}"}
+    url = "https://www.googleapis.com/youtube/v3/videos"
+    params = {
+        "part": "snippet",
+        "myRating": "like",
+        "maxResults": 50
+    }
+    response = requests.get(url, headers=headers, params=params)
+    return response.json()
+
+if "credentials" in st.session_state:
+    st.markdown("---")
+    if st.button("📊 Analyze My YouTube Mood History"):
+        access_token = st.session_state["credentials"]["access_token"]
+        liked_videos = get_liked_videos(access_token)
+        
+        if "items" in liked_videos:
+            video_titles = [item["snippet"]["title"] for item in liked_videos["items"]]
+            st.write(f"Found {len(video_titles)} liked videos")
+            
+            mood_df, mood_counts = analyze_mood_history(video_titles)
+            
+            if mood_df is not None:
+                st.subheader("Your YouTube Mood Breakdown 📊")
+                st.bar_chart(mood_counts)
+                st.dataframe(mood_df)
+            else:
+                st.warning("Couldn't match any songs to our database")
+        else:
+            st.error(f"Couldn't fetch videos: {liked_videos}")
+
 # ---------- STYLING ----------
 st.markdown("""
     <style>
