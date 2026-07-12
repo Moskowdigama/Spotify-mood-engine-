@@ -120,69 +120,95 @@ if "credentials" in st.session_state:
 st.markdown("""
     <style>
     .stApp {
-        background: linear-gradient(180deg, #0a0a0a 0%, #1a0b2e 100%);
-        color: white;
+        background-color: #121212;
+        color: #ffffff;
+        font-family: -apple-system, "Circular", "Helvetica Neue", sans-serif;
     }
     .big-title {
-        font-size: 42px;
-        font-weight: 900;
-        background: linear-gradient(90deg, #1DB954, #00d4ff, #ff00e5);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0px;
+        font-size: 32px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 2px;
+        letter-spacing: -0.5px;
     }
     .subtitle {
-        color: #a0a0a0;
-        font-size: 15px;
-        margin-bottom: 25px;
+        color: #b3b3b3;
+        font-size: 14px;
+        margin-bottom: 28px;
     }
     .song-card {
-        background: rgba(255,255,255,0.05);
-        backdrop-filter: blur(10px);
-        padding: 18px;
-        border-radius: 16px;
-        margin-bottom: 14px;
-        border: 1px solid rgba(255,255,255,0.1);
-        transition: 0.3s;
+        background: #181818;
+        padding: 14px 16px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        border: none;
+        transition: background 0.2s ease;
+    }
+    .song-card:hover {
+        background: #282828;
     }
     .song-title {
-        font-size: 19px;
-        font-weight: 800;
-        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;
     }
     .song-artist {
-        font-size: 14px;
+        font-size: 13px;
         color: #b3b3b3;
         margin-top: 2px;
     }
     .song-meta {
-        font-size: 12px;
-        color: #1DB954;
+        font-size: 11px;
+        color: #1ed760;
         margin-top: 6px;
-        font-weight: 600;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
     }
     .mood-badge {
         display: inline-block;
-        padding: 6px 16px;
-        border-radius: 20px;
-        background: linear-gradient(90deg, #1DB954, #00d4ff);
-        color: black;
+        padding: 8px 20px;
+        border-radius: 500px;
+        background: #1ed760;
+        color: #000000;
         font-weight: 700;
         font-size: 13px;
         margin-top: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
     }
     div.stButton > button {
-        background: linear-gradient(90deg, #1DB954, #00d4ff);
-        color: black;
-        font-weight: 800;
-        border-radius: 30px;
+        background: #1ed760;
+        color: #000000;
+        font-weight: 700;
+        border-radius: 500px;
         border: none;
-        padding: 12px 0px;
-        font-size: 16px;
+        padding: 12px 32px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: transform 0.15s ease, background 0.15s ease;
+    }
+    div.stButton > button:hover {
+        background: #1fdf64;
+        transform: scale(1.02);
+    }
+    div.stButton > button:active {
+        transform: scale(0.98);
+    }
+    .stSelectbox > div > div {
+        background-color: #282828;
+        border-radius: 4px;
+        border: none;
+    }
+    .stSlider {
+        color: #1ed760;
+    }
+    hr {
+        border-color: #282828;
     }
     </style>
 """, unsafe_allow_html=True)
-
 # ---------- LOAD DATA ----------
 df = pickle.load(open('songs.pkl', 'rb'))
 
