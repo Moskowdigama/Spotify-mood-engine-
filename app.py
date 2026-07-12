@@ -223,6 +223,20 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+if "credentials" not in st.session_state:
+    auth_url = get_auth_url()
+    st.markdown(f"""
+        <a href="{auth_url}" style="text-decoration: none;">
+            <div style="background: #ffffff; color: #000000; font-weight: 700; 
+                        border-radius: 500px; padding: 14px 32px; text-align: center;
+                        display: inline-block; font-size: 14px;">
+                Connect YouTube Account
+            </div>
+        </a>
+    """, unsafe_allow_html=True)
+else:
+    st.success("✅ YouTube Connected!")
+    
 # Hero section
 st.markdown("""
     <div class="hero-section">
