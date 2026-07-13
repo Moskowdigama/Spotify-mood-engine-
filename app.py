@@ -363,5 +363,5 @@ if st.button("🎶 run it back", use_container_width=True):
                             <div class="list-score">🔥 {row['Popularity']}</div>
                           </div>
                       """, unsafe_allow_html=True)
-     else:
+    else:
         st.warning("pick a mood or drop some emojis first fr")
