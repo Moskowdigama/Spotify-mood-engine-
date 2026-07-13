@@ -204,6 +204,18 @@ st.markdown("""
         width: 100%;
         text-transform: none;
     }
+
+    .stLinkButton > a {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-weight: 700 !important;
+        border-radius: 500px !important;
+        padding: 14px 32px !important;
+        text-decoration: none !important;
+        border: none !important;
+    }
+
+
     
     div.stButton > button:hover {
         background: #e0e0e0;
@@ -219,15 +231,7 @@ st.markdown("""
 
 if "credentials" not in st.session_state:
     auth_url = get_auth_url()
-    st.markdown(f"""
-        <a href="{auth_url}" style="text-decoration: none;">
-            <div style="background: #ffffff; color: #000000; font-weight: 700; 
-                        border-radius: 500px; padding: 14px 32px; text-align: center;
-                        display: inline-block; font-size: 14px;">
-                Connect YouTube Account
-            </div>
-        </a>
-    """, unsafe_allow_html=True)
+    st.link_button("Connect YouTube Account", auth_url, use_container_width=False)
 else:
     st.success("✅ YouTube Connected!")
     
