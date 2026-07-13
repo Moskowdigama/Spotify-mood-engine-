@@ -354,14 +354,14 @@ if st.button("🎶 run it back", use_container_width=True):
         else:
             st.markdown("### your playlist rn 🎧")
             for _, row in top_songs.iterrows():
-    st.markdown(f"""
-        <div class="list-row">
-            <div style="flex: 1;">
-                <div class="list-title">{row['Track']}</div>
-                <div class="list-subtitle">{row['Artist']} · {row['Genre']}</div>
-            </div>
-            <div class="list-score">🔥 {row['Popularity']}</div>
-        </div>
-    """, unsafe_allow_html=True)
-    else:
+                       st.markdown(f"""
+                          <div class="list-row">
+                            <div style="flex: 1;">
+                              <div class="list-title">{row['Track']}</div>
+                              <div class="list-subtitle">{row['Artist']} · {row['Genre']}</div>
+                            </div>
+                            <div class="list-score">🔥 {row['Popularity']}</div>
+                          </div>
+                      """, unsafe_allow_html=True)
+     else:
         st.warning("pick a mood or drop some emojis first fr")
